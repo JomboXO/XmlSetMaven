@@ -82,12 +82,12 @@ public class MainTest {
     @Test
     public void fillListOfNamesTest() {
         assertNotNull(Main.fillListOfNames(projects));
-        assertEquals("Return list of names members in all projects",resultsNames, Main.fillListOfNames(projects));
+        assertEquals("Has to be returned set of names: Ivan, fedya",resultsNames, Main.fillListOfNames(projects));
     }
 
     @Test
     public void fillMembersTest() {
         assertNotNull(Main.fillMembers(memberSet, projects,resultsNames));
-        assertEquals("Return new object \"Members\" for new xml-file", outputMemberSet, Main.fillMembers(memberSet, projects,resultsNames));
+        assertEquals("Has to be returned set of objects", outputMemberSet, Main.fillMembers(memberSet, projects,resultsNames));
     }
 }
