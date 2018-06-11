@@ -3,7 +3,6 @@ import entities.from_xml.Project;
 import entities.from_xml.Projects;
 import entities.to_xml.OutputMember;
 import entities.to_xml.Role;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -13,35 +12,29 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 public class MainTest {
 
-    private  Projects projects;
-    private  Project project;
-    private Member member;
-    private Role role;
-    private OutputMember outputMember;
-    private List<Project> projectList = new ArrayList<>();
-    private List<Member> memberList = new ArrayList<>();
-    private Set<String> resultsNames = new TreeSet<>();
-    private Set<Role> roleSet;
-    private Set<OutputMember> outputMemberSet = new TreeSet<>();
-    private Set<OutputMember> memberSet = new TreeSet<>();
+    private static Projects projects = new Projects();;
+    private static Set<String> resultsNames = new TreeSet<>();
+    private static Set<OutputMember> memberSet = new TreeSet<>();
+    private static Set<OutputMember> outputMemberSet = new TreeSet<>();
 
-    @Before
-    public void beforeTest(){
+    @BeforeClass
+    public static void beforeTest(){
+        List<Project> projectList = new ArrayList<>();
+        List<Member> memberList = new ArrayList<>();
+
         resultsNames.add("Ivan");
         resultsNames.add("fedya");
 
-        projects = new Projects();
+        OutputMember outputMember = new OutputMember();
+        Set<Role> roleSet = new TreeSet<>();
 
-        outputMember = new OutputMember();
-        roleSet = new TreeSet<>();
-
-        project = new Project();
+        Project project = new Project();
         project.setName("xml");
-        member = new Member();
+        Member member = new Member();
         member.setName("fedya");
         member.setRole("developer");
         memberList.add(member);
@@ -51,7 +44,7 @@ public class MainTest {
         member.setRole("manager");
         memberList.add(member);
         outputMember.setName("Ivan");
-        role = new Role();
+        Role role = new Role();
         role.setProject("xml");
         role.setName("manager");
         roleSet.add(role);
@@ -88,11 +81,13 @@ public class MainTest {
 
     @Test
     public void fillListOfNamesTest() {
-        assertEquals("results",resultsNames, Main.fillListOfNames(projects));
+        assertNotNull(Main.fillListOfNames(projects));
+        assertEquals("Return list of names members in all projects",resultsNames, Main.fillListOfNames(projects));
     }
 
     @Test
     public void fillMembersTest() {
-        assertEquals("result", outputMemberSet, Main.fillMembers(memberSet, projects,resultsNames));
+        assertNotNull(Main.fillMembers(memberSet, projects,resultsNames));
+        assertEquals("Return new object \"Members\" for new xml-file", outputMemberSet, Main.fillMembers(memberSet, projects,resultsNames));
     }
 }
