@@ -27,7 +27,7 @@ public class Main {
         doMarshaller(members);
     }
 
-    private static Set<String> fillListOfNames(Projects pr) {
+    public static Set<String> fillListOfNames(Projects pr) {
         Set<String> listOfNames = new TreeSet<>();
         for (Project project : pr.getProject())
             for (Member member : project.getMember())
@@ -36,7 +36,7 @@ public class Main {
         return listOfNames;
     }
 
-    private static Set<OutputMember> fillMembers(Set<OutputMember> memberSet, Projects projects, Set<String> listOfNames) {
+    public static Set<OutputMember> fillMembers(Set<OutputMember> memberSet, Projects projects, Set<String> listOfNames) {
         for (String name : listOfNames) {
             OutputMember outputMember = new OutputMember();
             Set<Role> roles = new TreeSet<>();
